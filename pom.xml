@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.kotoblog</groupId>
+	<artifactId>bestfriend-parent</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<modules>
+		<module>beans</module>
+		<module>parser</module>
+		<module>captcha-solver</module>
+		<module>camel-routes</module>
+		<module>bestfriend</module>
+	</modules>
+	<name>Parent POM for BestFriend</name>
+
+	<dependencies>
+
+		<!-- Provide dependency to the Tapestry javadoc taglet which replaces the 
+			Maven component report -->
+		<dependency>
+			<groupId>org.apache.tapestry</groupId>
+			<artifactId>tapestry-javadoc</artifactId>
+			<version>${tapestry-release-version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.tapestry</groupId>
+			<artifactId>tapestry-hibernate</artifactId>
+			<version>${tapestry-release-version}</version>
+		</dependency>
+
+	</dependencies>
+
+	<reporting />
+
+	<repositories>
+
+		<!-- This repository is only needed when the Tapestry version is a preview 
+			release, rather than a final release. -->
+		<repository>
+			<id>apache-staging</id>
+			<url>https://repository.apache.org/content/groups/staging/</url>
+		</repository>
+	</repositories>
+
+	<properties>
+		<tapestry-release-version>5.3.5</tapestry-release-version>
+		<servlet-api-release-version>2.5</servlet-api-release-version>
+		<testng-release-version>5.14.10</testng-release-version>
+		<easymock-release-version>3.0</easymock-release-version>
+		<hornetq-release-version>2.2.21.Final</hornetq-release-version>
+		<netty-release-version>3.4.5.Final</netty-release-version>
+		<jboss-jms-api-release-version>1.1.0.GA</jboss-jms-api-release-version>
+		<jnpserver-release-version>5.0.3.GA</jnpserver-release-version>
+		<hsqldb-release-version>1.8.0.7</hsqldb-release-version>
+		<spring-release-version>3.1.0.RELEASE</spring-release-version>
+		<camel-release-version>2.10.3</camel-release-version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+<!-- 		<hornetq-component-version>0.8.0-SNAPSHOT</hornetq-component-version> -->
+	</properties>
+
+	<build>
+		<finalName>bestfriend</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<optimize>true</optimize>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
