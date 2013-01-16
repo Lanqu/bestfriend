@@ -3,24 +3,33 @@
 
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camel="http://camel.apache.org/schema/spring"
-	xmlns:jee="http://www.springframework.org/schema/jee"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
 		http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
-		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
-	<context:component-scan base-package="com.kotoblog.camel" />
-	
-	<jee:jndi-lookup id="inVMConnectionFactory" jndi-name="java:/ConnectionFactory"/>
+	<bean id="inVMConnectionFactory" class="org.springframework.jndi.JndiObjectFactoryBean"
+		depends-on="jmsServerManagerImpl">
+		<property name="jndiName">
+			<value>java:/ConnectionFactory</value>
+		</property>
+	</bean>
+
+	<bean id="cachedConnectionFactory"
+		class="org.springframework.jms.connection.CachingConnectionFactory"
+		p:targetConnectionFactory-ref="inVMConnectionFactory"
+		p:sessionCacheSize="10" />
+
 
 	<bean id="jms" class="org.apache.camel.component.jms.JmsComponent">
-		<property name="connectionFactory" ref="inVMConnectionFactory" />
+		<property name="connectionFactory" ref="cachedConnectionFactory" />
 	</bean>
-	
+
 	<camel:camelContext>
 		<camel:route>
-			<camel:from uri="jms:job" />
+			<camel:from uri="jms:queue:job" />
 			<camel:process ref="camelProcessor" />
 			<camel:stop />
 		</camel:route>

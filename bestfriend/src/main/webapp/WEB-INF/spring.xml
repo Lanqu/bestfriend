@@ -4,11 +4,22 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
+	<!-- <context:property-placeholder location="classpath:jms.properties, classpath:dts.properties" 
+		/> -->
+
+	<context:property-placeholder location="classpath*:*.properties" />
+
+	<context:component-scan base-package="com.kotoblog.beans, com.kotoblog.persist, com.kotoblog.camel" />
+
 	<!-- start jms -->
 	<import resource="jms.xml" />
 
 	<!-- start camel -->
 	<import resource="classpath:META-INF/spring/camel-context.xml" />
 
+	<!-- Parser -->
 	<import resource="classpath:parser.xml" />
+
+	<!-- Persist -->
+	<import resource="classpath:persist.xml" />
 </beans>

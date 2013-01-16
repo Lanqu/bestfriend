@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:spring="http://camel.apache.org/schema/spring"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
-		http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring-2.0-M1.xsd">
-		
-	<context:property-placeholder location="classpath:jms.properties" />
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:spring="http://camel.apache.org/schema/spring" xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring-2.0-M1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
 	<bean name="namingServerImpl" class="org.jnp.server.NamingBeanImpl"
 		init-method="start" destroy-method="stop">
 	</bean>
@@ -46,36 +45,7 @@
 		<constructor-arg ref="hornetQServerImpl" />
 	</bean>
 
-<!-- 	JMS asynchronous messaging  -->
-<!-- 	<bean id="inVMConnectionFactory" class="org.springframework.jndi.JndiObjectFactoryBean"  -->
-<!-- 		depends-on="jmsServerManagerImpl"> <property name="jndiName"> <value>java:/ConnectionFactory</value>  -->
-<!-- 		</property> </bean> -->
-
-<!-- 	<bean id="exampleQueue" class="org.springframework.jndi.JndiObjectFactoryBean"
-		depends-on="jmsServerManagerImpl">
-		<property name="jndiName">
-			<value>/queue/ExampleQueue</value>
-		</property>
-	</bean> -->
-
-<!-- 	<bean id="listener"
-		class="com.kotoblog.bestfriend.hornetq.listeners.ExampleListener" />
-
-	<bean id="messageSender" class="com.kotoblog.bestfriend.hornetq.listeners.MessageSender"
-		depends-on="exampleQueue">
-		<property name="connectionFactory" ref="inVMConnectionFactory" />
-		<property name="destination" ref="exampleQueue" />
-	</bean>
-
-	<bean
-		class="org.springframework.jms.listener.DefaultMessageListenerContainer"
-		depends-on="exampleQueue">
-		<property name="connectionFactory" ref="inVMConnectionFactory" />
-		<property name="destination" ref="exampleQueue" />
-		<property name="messageListener" ref="listener" />
-		<property name="concurrency">
-			<value>3-5</value>
-		</property>
-	</bean> -->
+	<!-- <jee:jndi-lookup id="inVMConnectionFactory" jndi-name="java:/ConnectionFactory" 
+		/> -->
 
 </beans>

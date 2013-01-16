@@ -1,12 +1,29 @@
 package com.kotoblog.beans;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
+
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 import org.springframework.stereotype.Component;
 
 @Component
-public class Site {
+@Entity
+public class Site implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7923961601994313645L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
 
 	// site url
 	String url;
@@ -22,7 +39,7 @@ public class Site {
 
 	// xpath for selecting links on the search page
 	String linksXpath;
-	
+
 	// campaign keyword
 	String keyword;
 
@@ -33,13 +50,14 @@ public class Site {
 	String titleXpath;
 
 	// List of excluders that can be removed by contentXpath
+	@ElementCollection
 	List<String> excluders;
 
 	// Clear anchors?
 	Boolean stripLinks;
 
 	public String getUrl() {
-		return url;
+		return this.url;
 	}
 
 	public void setUrl(String url) {
@@ -47,7 +65,7 @@ public class Site {
 	}
 
 	public String getContentXpath() {
-		return contentXpath;
+		return this.contentXpath;
 	}
 
 	public void setContentXpath(String xpath) {
@@ -55,7 +73,7 @@ public class Site {
 	}
 
 	public String getListerXpath() {
-		return listerXpath;
+		return this.listerXpath;
 	}
 
 	public void setListerXpath(String lister) {
@@ -63,7 +81,7 @@ public class Site {
 	}
 
 	public String getKeyword() {
-		return keyword;
+		return this.keyword;
 	}
 
 	public void setKeyword(String keyword) {
@@ -75,11 +93,11 @@ public class Site {
 	}
 
 	public String getSearchXpath() {
-		return searchXpath;
+		return this.searchXpath;
 	}
 
 	public String getKeywordFieldXpath() {
-		return keywordFieldXpath;
+		return this.keywordFieldXpath;
 	}
 
 	public void setKeywordFieldXpath(String keywordField) {
@@ -88,11 +106,11 @@ public class Site {
 
 	public List<String> getExcluders() {
 
-		if (excluders == null) {
-			excluders = new LinkedList<String>();
+		if (this.excluders == null) {
+			this.excluders = new LinkedList<String>();
 		}
 
-		return excluders;
+		return this.excluders;
 	}
 
 	public void setExcluders(List<String> excluders) {
@@ -100,7 +118,7 @@ public class Site {
 	}
 
 	public Boolean getStripLinks() {
-		return stripLinks;
+		return this.stripLinks;
 	}
 
 	public void setStripLinks(Boolean stripLinks) {
@@ -108,7 +126,7 @@ public class Site {
 	}
 
 	public String getTitleXpath() {
-		return titleXpath;
+		return this.titleXpath;
 	}
 
 	public void setTitleXpath(String title) {
@@ -116,11 +134,19 @@ public class Site {
 	}
 
 	public String getLinksXpath() {
-		return linksXpath;
+		return this.linksXpath;
 	}
 
 	public void setLinksXpath(String linksXpath) {
 		this.linksXpath = linksXpath;
+	}
+
+	public Integer getId() {
+		return this.id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 }
