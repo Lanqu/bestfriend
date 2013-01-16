@@ -22,7 +22,7 @@
 
 	<!-- MBean server -->
 	<bean name="mbeanServer" class="java.lang.management.ManagementFactory"
-		factory-method="getPlatformMBeanServer"></bean>
+		factory-method="getPlatformMBeanServer" depends-on="namingServer"></bean>
 
 	<!-- The core configuration -->
 	<bean name="fileConfiguration" class="org.hornetq.core.config.impl.FileConfiguration"
