@@ -22,15 +22,22 @@
 		p:targetConnectionFactory-ref="inVMConnectionFactory"
 		p:sessionCacheSize="10" />
 
-
 	<bean id="jms" class="org.apache.camel.component.jms.JmsComponent">
 		<property name="connectionFactory" ref="cachedConnectionFactory" />
 	</bean>
 
 	<camel:camelContext>
+        <camel:endpoint id="parser" uri="jms:queue:${jms.parser}"/>
+        <camel:endpoint id="save" uri="jms:queue:${jms.save}"/>
+        
 		<camel:route>
-			<camel:from uri="jms:queue:job" />
-			<camel:process ref="camelProcessor" />
+			<camel:from uri="ref:parser" />
+			<camel:process ref="camelParser" />
+			<camel:stop />
+		</camel:route>
+		<camel:route>
+			<camel:from uri="ref:save" />
+			<camel:process ref="camelSave" />
 			<camel:stop />
 		</camel:route>
 	</camel:camelContext>

@@ -11,6 +11,7 @@ import org.apache.tapestry5.corelib.components.Zone;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.Symbol;
 
+import com.kotoblog.beans.Site;
 import com.kotoblog.camel.CamelSender;
 
 /**
@@ -35,12 +36,30 @@ public class Index {
 	@Inject
 	private CamelSender sender;
 
+	@Inject
+	private Site site;
+
 	public Date getCurrentTime() {
 		return new Date();
 	}
 
 	void onActionFromGo() {
-		this.sender.send(this.tapestryVersion);
+		this.site.setKeyword("hdd recovering");
+		this.site.setKeywordFieldXpath("//*[@id='internal-search']//*[@name='q']");
+
+		this.site.setUrl("http://ezinearticles.com");
+
+		this.site.setContentXpath("//*[@id=\"article-contentXpath\"]");
+		this.site.setSearchXpath("//*[@id='internal-search']//button");
+		this.site.setTitleXpath("//*[@id='article-titleXpath']/h1");
+
+		this.site.setListerXpath("//*[@id='search-results']//a[@class='next']");
+		this.site.setLinksXpath("//*[@id='search-results']//h3/a");
+
+		this.site.getExcluders().add("//*[@id=\"article-titleXpath\"]/p");
+		this.site.getExcluders().add("//*[@id=\"article-body\"]/p");
+
+		this.sender.sendToSave(this.site);
 	}
 
 	void onActionFromIncrement() {

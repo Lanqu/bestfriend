@@ -11,19 +11,13 @@
 		</entries>
 	</connection-factory>
 
-	<!-- <connection-factory name="NettyConnectionFactory"> -->
-	<!-- <connectors> -->
-	<!-- <connector-ref connector-name="netty"/> -->
-	<!-- </connectors> -->
-	<!-- <entries> -->
-	<!-- <entry name="/ConnectionFactory"/> -->
-	<!-- <entry name="/XAConnectionFactory"/> -->
-	<!-- </entries> -->
-	<!-- </connection-factory> -->
-
- 	<queue name="job">
-		<entry name="/queue/job" />
+ 	<queue name="${jms.parser}">
+		<entry name="/queue/parser" />
 	</queue>
+	
+	<queue name="${jms.save}">
+        <entry name="/queue/save" />
+    </queue>
 
 	<queue name="DLQ">
 		<entry name="/queue/DLQ" />
@@ -31,45 +25,5 @@
 	<queue name="ExpiryQueue">
 		<entry name="/queue/ExpiryQueue" />
 	</queue>
-
-	<!-- <queue name="ExampleQueue">
-		<entry name="/queue/ExampleQueue" />
-	</queue>
-
-	<topic name="ExampleTopic">
-		<entry name="/topic/ExampleTopic" />
-	</topic>
-
-	<queue name="AQueue">
-		<entry name="/queue/AQueue" />
-	</queue>
-	<queue name="BQueue">
-		<entry name="/queue/BQueue" />
-	</queue>
-	<queue name="CQueue">
-		<entry name="/queue/CQueue" />
-	</queue>
-	<queue name="DQueue">
-		<entry name="/queue/DQueue" />
-	</queue>
-	<queue name="EQueue">
-		<entry name="/queue/EQueue" />
-	</queue>
-
-	<topic name="ATopic">
-		<entry name="/topic/ATopic" />
-	</topic>
-	<topic name="BTopic">
-		<entry name="/topic/BTopic" />
-	</topic>
-	<topic name="CTopic">
-		<entry name="/topic/CTopic" />
-	</topic>
-	<topic name="DTopic">
-		<entry name="/topic/DTopic" />
-	</topic>
-	<topic name="ETopic">
-		<entry name="/topic/ETopic" />
-	</topic> -->
 
 </configuration>

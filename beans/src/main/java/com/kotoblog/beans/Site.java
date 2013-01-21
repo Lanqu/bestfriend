@@ -54,7 +54,7 @@ public class Site implements Serializable {
 	List<String> excluders;
 
 	// Clear anchors?
-	Boolean stripLinks;
+	Boolean stripLinks = true;
 
 	public String getUrl() {
 		return this.url;
