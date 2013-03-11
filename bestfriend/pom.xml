@@ -148,21 +148,27 @@
 			<version>${tapestry-release-version}</version>
 			<scope>test</scope>
 		</dependency>
-		
-		<!-- Provide dependency to the Tapestry javadoc taglet which replaces the 
-            Maven component report -->
-        <dependency>
-            <groupId>org.apache.tapestry</groupId>
-            <artifactId>tapestry-javadoc</artifactId>
-            <version>${tapestry-release-version}</version>
-            <scope>provided</scope>
-        </dependency>
 
-<!--         <dependency> -->
-<!--             <groupId>org.apache.tapestry</groupId> -->
-<!--             <artifactId>tapestry-hibernate</artifactId> -->
-<!--             <version>${tapestry-release-version}</version> -->
-<!--         </dependency> -->
+		<dependency>
+			<groupId>org.tynamo</groupId>
+			<artifactId>tapestry-security</artifactId>
+			<version>${tapestry-security-version}</version>
+		</dependency>
+
+		<!-- Provide dependency to the Tapestry javadoc taglet which replaces the 
+			Maven component report -->
+		<dependency>
+			<groupId>org.apache.tapestry</groupId>
+			<artifactId>tapestry-javadoc</artifactId>
+			<version>${tapestry-release-version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- <dependency> -->
+		<!-- <groupId>org.apache.tapestry</groupId> -->
+		<!-- <artifactId>tapestry-hibernate</artifactId> -->
+		<!-- <version>${tapestry-release-version}</version> -->
+		<!-- </dependency> -->
 
 		<!-- Provided by the servlet container, but sometimes referenced in the 
 			application code. -->
@@ -179,18 +185,18 @@
 			<artifactId>parser</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.kotoblog</groupId>
 			<artifactId>camel-routes</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-		
+
 		<dependency>
-            <groupId>com.kotoblog</groupId>
-            <artifactId>persist</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+			<groupId>com.kotoblog</groupId>
+			<artifactId>persist</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>
